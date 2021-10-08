@@ -128,5 +128,5 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node
 
-uploads
+backend/public/uploads
 database.json

@@ -17,8 +17,6 @@ const { v4: uuidv4 } = require('uuid');
 app.use(fileUpload({
     createParentPath: true
 }));
-
-//add other middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +24,6 @@ app.use(morgan('dev'));
 
 app.post('/upload-meme', (req, res) => {
     try {
-        
         if (!req.files) {
             res.send({
                 status: false,
@@ -39,12 +36,14 @@ app.post('/upload-meme', (req, res) => {
             const id = uuidv4();
 
             const file_name_arr = file.name.split('.');
-            const file_extension = file_name_arr[file_name_arr.length -1]; 
-           
-            file.mv(`./uploads/${id}.${file_extension}`);
+            const file_extension = file_name_arr[file_name_arr.length - 1];
+
+            file.mv(`./public/uploads/${id}.${file_extension}`);
 
             const meme_data = {
+                id,
                 name: file.name,
+                file_extension,
                 mimetype: file.mimetype,
                 size: file.size,
                 upload_date: Date.now(),
@@ -67,7 +66,7 @@ app.post('/upload-meme', (req, res) => {
 });
 
 app.get('/memes', (req, res) => {
-    res.send(db.JSON());
+    res.send(Object.values(db.JSON()));
 })
 
 app.use(express.static('public'))
@@ -77,5 +76,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Meme Inspector listening at http://localhost:${port}`)
 })
