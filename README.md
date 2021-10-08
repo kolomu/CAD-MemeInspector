@@ -1,6 +1,8 @@
 # Meme Inspector
 Simple Web Application to tag and store memes and other files and see a list of all uploads with some details like size, mimetype & upload date. All file types are accepted and there is no limit in file size.
 
+![demo](https://github.com/kolomu/CAD-MemeInspector/blob/master/demo.gif)
+
 Operating System: Runs on linux and mac.
 
 Programming language: Meme Inspector is written in pure JavaScript (ES2015), HTML5 & CSS2 
