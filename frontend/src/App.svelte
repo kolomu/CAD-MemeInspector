@@ -56,8 +56,8 @@
 
 	<table>
 		<tr>
-			<th> Meme name </th>
-			<th> Tags </th>
+			<th>Meme name</th>
+			<th>Tags</th>
 			<th>Size</th>
 			<th>Mimetype</th>
 			<th>Uploaded at</th>
