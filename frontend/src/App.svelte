@@ -54,36 +54,38 @@
 		{/if}
 	</div>
 
-	<table>
-		<tr>
-			<th>Meme name</th>
-			<th>Tags</th>
-			<th>Size</th>
-			<th>Mimetype</th>
-			<th>Uploaded at</th>
-		</tr>
-		{#each uploadedMemes as meme}
+	{#if uploadedMemes.length > 0}
+		<table>
 			<tr>
-				<td>
-					<a href="/uploads/{meme.id}.{meme.file_extension}"
-						>{meme.name}</a
-					>
-				</td>
-				<td>
-					{meme.tags}
-				</td>
-				<td>
-					{Math.round(meme.size / 1024 / 102.4) / 10} MB
-				</td>
-				<td>
-					{meme.mimetype}
-				</td>
-				<td>
-					{new Date(meme.upload_date).toUTCString()}
-				</td>
+				<th>Meme name</th>
+				<th>Tags</th>
+				<th>Size</th>
+				<th>Mimetype</th>
+				<th>Uploaded at</th>
 			</tr>
-		{/each}
-	</table>
+			{#each uploadedMemes as meme}
+				<tr>
+					<td>
+						<a href="/uploads/{meme.id}.{meme.file_extension}"
+							>{meme.name}</a
+						>
+					</td>
+					<td>
+						{meme.tags}
+					</td>
+					<td>
+						{Math.round(meme.size / 1024 / 102.4) / 10} MB
+					</td>
+					<td>
+						{meme.mimetype}
+					</td>
+					<td>
+						{new Date(meme.upload_date).toUTCString()}
+					</td>
+				</tr>
+			{/each}
+		</table>
+	{/if}
 </main>
 
 <style>
