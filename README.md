@@ -13,3 +13,12 @@ The application was tested in Chrome Version 94.0.4606.61, Safari 14.1.2, Brave 
 Runtime and Webserver: For the backend we used [Node.js](https://nodejs.org/en/) Version 16.10.0, "a JavaScript runtime built on Chrome's V8 JavaScript engine" and [ExpressJS](https://expressjs.com/), a "Fast, unopinionated, minimalist web framework for Node.js".
 
 Persistence: For persistence, we use [Simple JSONdb](https://www.npmjs.com/package/simple-json-db), a "simple, no-frills, JSON storage engine for Node.JS with full test coverage", which provides an API to write data into a [JSON file](https://github.com/kolomu/CAD-MemeInspector/blob/master/backend/database.json).
+
+---
+
+To run the App locally:
+
+1. Build the frontend: `cd frontend && npm i && npm run build`
+2. Build the backend: `cd ../backend && npm i`
+3. Run the backend (serving the frontend): `npm run watch`
+4. Go to [http://localhost:3000](http://localhost:3000)
