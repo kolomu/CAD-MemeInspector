@@ -3,14 +3,15 @@ const { MongoClient } = require('mongodb');
 const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url);
 const dbName = 'meme_inspector';
-const collectionName = 'memes';
-let db = undefined;
+const memeCollectionName = 'memes';
+let meme_collection = undefined;
 
 module.exports = {
     init_db: async () => {
-        console.log(`initialize db: [${url}] db: [${dbName}] collection: [${collectionName}]`)
+        console.log(`initialize db: [${url}] db: [${dbName}] collection: [${memeCollectionName}]`)
         await client.connect();
-        db = client.db(dbName);
+        const db = client.db(dbName);
+        meme_collection = db.collection(memeCollectionName);
     },
 
     destroy_db: () => {
@@ -19,8 +20,7 @@ module.exports = {
 
     getMemes: async () => {
         try {
-            const collection = db.collection(collectionName);
-            return collection.find({}).toArray();
+            return meme_collection.find({}).toArray();
         } catch (err) {
             console.error(err);
             throw err;
@@ -29,8 +29,7 @@ module.exports = {
 
     saveMeme: async (id, meme_data) => {
         try {
-            const collection = db.collection(collectionName);
-            await collection.insertOne({ _id: id, ...meme_data });
+            await meme_collection.insertOne({ _id: id, ...meme_data });
         } catch (err) {
             console.error(err);
             throw err;
