@@ -1,25 +1,20 @@
-
 const express = require('express')
 const app = express()
 const port = 3000
 const path = require('path')
 const fileUpload = require('express-fileupload');
 const cors = require('cors')
-const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const _ = require('lodash');
 
-const JSONdb = require('simple-json-db');
-const db = new JSONdb('database.json');
-
+const { init_db, destroy_db, getMemes, saveMeme } = require('./db');
+init_db();
 const { v4: uuidv4 } = require('uuid');
 
 app.use(fileUpload({
     createParentPath: true
 }));
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 app.post('/upload-meme', (req, res) => {
@@ -50,9 +45,8 @@ app.post('/upload-meme', (req, res) => {
                 tags: tags_arr
             }
 
-            db.set(id, meme_data);
+            saveMeme(id, meme_data);
 
-            //send response
             res.send({
                 status: true,
                 message: 'File is uploaded',
@@ -65,8 +59,8 @@ app.post('/upload-meme', (req, res) => {
     }
 });
 
-app.get('/memes', (req, res) => {
-    res.send(Object.values(db.JSON()));
+app.get('/memes', async (req, res) => {
+    res.send(await getMemes());
 })
 
 app.use(express.static('public'))
@@ -75,6 +69,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 })
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Meme Inspector listening at http://localhost:${port}`)
+})
+
+process.on('SIGINT', () => {
+    server.close(() => {
+        console.log('\nclosing db connection');
+        destroy_db();
+        console.log('HTTP server closed')
+    });
+
 })
