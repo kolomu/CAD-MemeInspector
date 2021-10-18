@@ -17,7 +17,7 @@ app.use(fileUpload({
 app.use(cors());
 app.use(morgan('dev'));
 
-app.post('/upload-meme', (req, res) => {
+app.post('/api/upload-meme', (req, res) => {
     try {
         if (!req.files) {
             res.send({
@@ -59,13 +59,13 @@ app.post('/upload-meme', (req, res) => {
     }
 });
 
-app.get('/memes', async (req, res) => {
+app.get('/api/memes', async (req, res) => {
     res.send(await getMemes());
 })
 
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
+app.get('/api/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 })
 

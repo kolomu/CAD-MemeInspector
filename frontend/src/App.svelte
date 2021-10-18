@@ -7,7 +7,7 @@
 		const formData = new FormData();
 		formData.append("meme", files[0]);
 		formData.append("tags", tags);
-		fetch("/upload-meme", {
+		fetch("/api/upload-meme", {
 			method: "POST",
 			body: formData,
 		})
@@ -25,7 +25,7 @@
 	}
 
 	function loadMemes() {
-		fetch(new Request("/memes"))
+		fetch(new Request("/api/memes"))
 			.then(function (response) {
 				if (!response.ok) {
 					throw new Error(`HTTP error! status: ${response.status}`);
@@ -66,7 +66,7 @@
 			{#each uploadedMemes as meme}
 				<tr>
 					<td>
-						<a href="/uploads/{meme.id}.{meme.file_extension}"
+						<a href="/api/uploads/{meme.id}.{meme.file_extension}"
 							>{meme.name}</a
 						>
 					</td>
