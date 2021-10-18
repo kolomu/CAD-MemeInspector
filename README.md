@@ -39,3 +39,7 @@ Below are the steps taken to use the meme-inspector image.
 ![Step 3](./docs/screenshot3.png)
 
 ![Step 4](./docs/screenshot4.png)
+---
+
+Connect to EC2 Instance:
+1. `ssh -i "cad_meme_inspector.cer" ec2-user@ec2-18-198-185-222.eu-central-1.compute.amazonaws.com`
