@@ -130,3 +130,4 @@ dist
 
 backend/public/uploads
 cad_meme_inspector.cer
+.DS_Store
