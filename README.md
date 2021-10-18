@@ -27,3 +27,8 @@ To run the App locally:
    - collection: `memes`
 4. Run the backend (serving the frontend): `npm run watch`
 5. Go to [http://localhost:3000](http://localhost:3000)
+
+---
+
+Connect to EC2 Instance:
+1. `ssh -i "cad_meme_inspector.cer" ec2-user@ec2-18-198-185-222.eu-central-1.compute.amazonaws.com`
