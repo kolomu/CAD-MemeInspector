@@ -1,7 +1,7 @@
 # Meme Inspector
 Simple Web Application to tag and store memes and other files and see a list of all uploads with some details like size, mimetype & upload date. All file types are accepted and there is no limit in file size.
 
-![demo](https://github.com/kolomu/CAD-MemeInspector/blob/master/demo.gif)
+![demo](./docs/demo.gif)
 
 Operating System: Runs on linux and mac.
 
@@ -28,6 +28,17 @@ To run the App locally:
 4. Run the backend (serving the frontend): `npm run watch`
 5. Go to [http://localhost:3000](http://localhost:3000)
 
+## Deployment of Image
+This project uses [AWS EC2](https://eu-central-1.console.aws.amazon.com/ec2/v2/home?region=eu-central-1#Instances:).
+Below are the steps taken to use the meme-inspector image.
+
+![Step 1](./docs/screenshot1.png)
+
+![Step 2](./docs/screenshot2.png)
+
+![Step 3](./docs/screenshot3.png)
+
+![Step 4](./docs/screenshot4.png)
 ---
 
 Connect to EC2 Instance:
