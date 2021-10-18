@@ -66,7 +66,7 @@
 			{#each uploadedMemes as meme}
 				<tr>
 					<td>
-						<a href="/api/uploads/{meme.id}.{meme.file_extension}"
+						<a href="/uploads/{meme.id}.{meme.file_extension}"
 							>{meme.name}</a
 						>
 					</td>
