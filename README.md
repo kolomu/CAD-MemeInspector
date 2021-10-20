@@ -43,3 +43,7 @@ Below are the steps taken to use the meme-inspector image.
 
 Connect to EC2 Instance:
 1. `ssh -i "cad_meme_inspector.cer" ec2-user@ec2-18-198-185-222.eu-central-1.compute.amazonaws.com`
+
+
+## Miscellaneous
+[meme-inspector.service](./meme-inspector.service) is a script for systemd which starts the nodejs server automatically at startup.

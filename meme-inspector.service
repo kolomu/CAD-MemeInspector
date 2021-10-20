@@ -1,0 +1,14 @@
+[Unit]
+Description=Start meme_inspector backend script. \
+Documentation=https://github.com/kolomu/CAD-MemeInspector
+After=network.target
+
+[Service]
+Type=simple
+User=ec2-user
+ExecStart=/home/ec2-user/.nvm/versions/node/v16.11.1/bin/node /home/ec2-user/meme-inspector/backend.index.js
+Restart=on-failure
+WorkingDirectory=/home/ec2-user/meme-inspector/backend
+
+[Install]
+WantedBy=multi-user.target
