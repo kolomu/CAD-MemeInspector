@@ -1,5 +1,5 @@
 [Unit]
-Description=Start meme_inspector backend script. \
+Description=Start meme_inspector backend script.
 Documentation=https://github.com/kolomu/CAD-MemeInspector
 After=network.target
 
