@@ -7,11 +7,10 @@ const cors = require('cors')
 const morgan = require('morgan')
 const _ = require('lodash');
 
-const { init_db, destroy_db, getMemes, saveMeme } = require('./db');
 const { save_file } = require('./s3');
-init_db();
-const { v4: uuidv4 } = require('uuid');
+const { save_meme, get_memes } = require('./dynamo_db');
 
+const { v4: uuidv4 } = require('uuid');
 
 app.use(fileUpload({
     createParentPath: true
@@ -52,13 +51,21 @@ app.post('/api/upload-meme', async (req, res) => {
                 tags: tags_arr
             }
 
-            saveMeme(id, meme_data);
+            try {
+                await save_meme(id, meme_data)
+            } catch(err) {
+                 console.log(err);
+                 return res.send({
+                     message: err
+                 });
+             }
 
             res.send({
                 status: true,
                 message: 'File is uploaded',
                 data: meme_data
             });
+
         }
     } catch (err) {
         console.log(err);
@@ -67,7 +74,7 @@ app.post('/api/upload-meme', async (req, res) => {
 });
 
 app.get('/api/memes', async (req, res) => {
-    res.send(await getMemes());
+    res.send(await get_memes());
 })
 
 app.use(express.static('public'))
@@ -78,13 +85,4 @@ app.get('/api/', (req, res) => {
 
 const server = app.listen(port, () => {
     console.log(`Meme Inspector listening at http://localhost:${port}`)
-})
-
-process.on('SIGINT', () => {
-    server.close(() => {
-        console.log('\nclosing db connection');
-        destroy_db();
-        console.log('HTTP server closed')
-    });
-
 })
