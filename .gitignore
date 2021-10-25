@@ -129,5 +129,6 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node
 
 backend/public/uploads
+backend/public/build
 cad_meme_inspector.cer
 .DS_Store
