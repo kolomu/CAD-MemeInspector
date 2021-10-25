@@ -50,7 +50,7 @@
 		{#if files && files[0]}
 			<button on:click={uploadMeme}>Submit</button>
 		{:else}
-			<button on:click={uploadMeme} disabled>Submit</button>
+			<button disabled>Submit</button>
 		{/if}
 	</div>
 

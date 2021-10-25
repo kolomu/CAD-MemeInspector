@@ -8,8 +8,10 @@ const morgan = require('morgan')
 const _ = require('lodash');
 
 const { init_db, destroy_db, getMemes, saveMeme } = require('./db');
+const { save_file } = require('./s3');
 init_db();
 const { v4: uuidv4 } = require('uuid');
+
 
 app.use(fileUpload({
     createParentPath: true
@@ -17,7 +19,7 @@ app.use(fileUpload({
 app.use(cors());
 app.use(morgan('dev'));
 
-app.post('/api/upload-meme', (req, res) => {
+app.post('/api/upload-meme', async (req, res) => {
     try {
         if (!req.files) {
             res.send({
@@ -32,6 +34,13 @@ app.post('/api/upload-meme', (req, res) => {
 
             const file_name_arr = file.name.split('.');
             const file_extension = file_name_arr[file_name_arr.length - 1];
+            const file_name = `${id}.${file_extension}`;
+
+            try {
+                await save_file(file_name, file.data);
+            } catch (err) {
+                console.log(err);
+            } 
 
             file.mv(`./public/uploads/${id}.${file_extension}`);
 
