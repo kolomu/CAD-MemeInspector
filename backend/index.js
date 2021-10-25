@@ -42,8 +42,6 @@ app.post('/api/upload-meme', async (req, res) => {
                 console.log(err);
             } 
 
-            file.mv(`./public/uploads/${id}.${file_extension}`);
-
             const meme_data = {
                 id,
                 name: file.name,

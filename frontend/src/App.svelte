@@ -66,9 +66,7 @@
 			{#each uploadedMemes as meme}
 				<tr>
 					<td>
-						<a href="/uploads/{meme.id}.{meme.file_extension}"
-							>{meme.name}</a
-						>
+						<a href="https://meme-inspector-bucket.s3.eu-central-1.amazonaws.com/{meme.id}.{meme.file_extension}">{meme.name}</a>
 					</td>
 					<td>
 						{meme.tags}
